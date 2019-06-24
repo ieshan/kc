@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/ieshan/kc/helper"
 	ns "github.com/ieshan/kc/cmd/namespace"
+	"github.com/ieshan/kc/helper"
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +15,6 @@ var rootCmd = &cobra.Command{
 }
 
 func init()  {
-	helper.Setup()
 	defaultNamespace := helper.GetString("DefaultNamespace")
 	rootCmd.AddCommand(ns.NsCmd)
 	rootCmd.PersistentFlags().StringVarP(&namespace, "namespace", "n", defaultNamespace, "namespace")

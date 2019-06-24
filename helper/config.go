@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func Setup()  {
+func init()  {
 	viper.SetConfigType("json")
 	viper.SetConfigName(".kc_config")
 	viper.AddConfigPath("$HOME/")
