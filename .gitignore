@@ -87,4 +87,4 @@ fabric.properties
 # Dependency directories (remove the comment below to include it)
 # vendor/
 kc
-.kubectl_namespace
+.kc_config.json
