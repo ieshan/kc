@@ -1,26 +1,26 @@
-package cmd
+package namespace
 
 import (
+	"github.com/ieshan/kc/helper"
 	"github.com/manifoldco/promptui"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 var nsDeleteCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "Delete namespace",
 	Run: func(cmd *cobra.Command, args []string) {
-		nsList := viper.GetStringSlice("NamespaceList")
+		nsList := helper.GetStringSlice("NamespaceList")
 		prompt := promptui.Select{
 			Label: "Select namespace to delete:",
 			Items: nsList,
 		}
 		_, result, err := prompt.Run()
-		ErrorFatal(err, "Prompt failed.\n")
+		helper.ErrorFatal(err, "Prompt failed.\n")
 		if result == "default" {
 			return
 		}
-		pos, inList := Contains(result, nsList)
+		pos, inList := helper.Contains(result, nsList)
 		if !inList {
 			return
 		}
@@ -28,14 +28,14 @@ var nsDeleteCmd = &cobra.Command{
 		nsList[len(nsList) - 1] = ""     // Erase last element (write zero value).
 		nsList = nsList[:len(nsList)-1]
 
-		viper.Set("NamespaceList", nsList)
-		if viper.GetString("DefaultNamespace") == result {
-			viper.Set("DefaultNamespace", "default")
+		helper.Set("NamespaceList", nsList)
+		if helper.GetString("DefaultNamespace") == result {
+			helper.Set("DefaultNamespace", "default")
 		}
-		WriteConfig()
+		helper.WriteConfig()
 	},
 }
 
 func init()  {
-	nsCmd.AddCommand(nsDeleteCmd)
+	NsCmd.AddCommand(nsDeleteCmd)
 }

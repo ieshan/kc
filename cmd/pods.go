@@ -1,8 +1,8 @@
 package cmd
 
 import (
+	"github.com/ieshan/kc/helper"
 	"github.com/spf13/cobra"
-	"log"
 	"os"
 	"os/exec"
 )
@@ -10,14 +10,12 @@ import (
 var podsCmd = &cobra.Command{
 	Use:   "pods",
 	Short: "Returns a list of pods",
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		kubeCmd := exec.Command("kubectl", "get", "pods", "-n", namespace)
 		kubeCmd.Stdout = os.Stdout
 		kubeCmd.Stderr = os.Stderr
 		err := kubeCmd.Run()
-		if err != nil {
-			log.Fatalf("%s\n", err)
-		}
+		return helper.ErrorPrintln(err, "Command execution error")
 	},
 }
 
