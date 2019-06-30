@@ -11,7 +11,7 @@ import (
 
 var contextCmd = &cobra.Command{
 	Use:   "context",
-	Short: "Select context",
+	Short: "Switch context",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		cfg, err := helper.GetKubeConfig()
 		helper.ErrorFatal(err, "Error reading kubenetes config")
