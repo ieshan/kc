@@ -14,12 +14,9 @@ var rootCmd = &cobra.Command{
 	Long: ``,
 }
 
-func init()  {
+func Execute() {
 	defaultNamespace := helper.GetString("DefaultNamespace")
 	rootCmd.AddCommand(ns.NsCmd)
 	rootCmd.PersistentFlags().StringVarP(&namespace, "namespace", "n", defaultNamespace, "namespace")
-}
-
-func Execute() {
 	helper.ErrorFatal(rootCmd.Execute(), "Failed command execution")
 }
