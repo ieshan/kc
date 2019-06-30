@@ -7,4 +7,5 @@ require (
 	github.com/spf13/cobra v0.0.4
 	github.com/spf13/viper v1.4.0
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
+	gopkg.in/yaml.v3 v3.0.0-20190502103701-55513cacd4ae
 )
